@@ -245,13 +245,6 @@ class SampleCarousel {
         this.injectCarouselInsideDiv();
     }
 
-    cleanAnimationClasses(element){
-        element.classList.remove('slide-in-from-right');
-        element.classList.remove('slide-in-from-left');
-        element.classList.remove('slide-out-to-left');
-        element.classList.remove('slide-out-to-right');
-    }
-
     outputError(){
         throw new Error(this.error_msg);
     }
