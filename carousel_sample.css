@@ -1,0 +1,65 @@
+/** CENTER MAIN DIV */
+.lsm-carousel {
+    margin: auto;
+    max-width: 700px;
+}
+
+/** FLEX INNER DIV */
+.carousel-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+/** REMOVE DOTS FROM LI */
+.carousel-text-list {
+    position: relative;
+    display: flex;
+    font-family: monospace;
+    list-style-type: none;
+    padding-inline-start: 0px;
+    overflow-x: hidden;
+    justify-content: center;
+}
+
+/** HIDE ITEM */
+.hide-item-list {
+    display: none !important;
+}
+
+/** ARROWS */
+.arrow {
+    user-select: none; /* standard syntax */
+    -webkit-user-select: none; /* webkit (safari, chrome) browsers */
+    -moz-user-select: none; /* mozilla browsers */
+    -khtml-user-select: none; /* webkit (konqueror) browsers */
+    -ms-user-select: none; /* IE10+ */
+}
+
+.arrow:hover {
+    background-color: crimson;
+    cursor: pointer;
+}
+
+.arrow:active {
+    background-color: rgb(177, 16, 48);
+}
+
+.left-arrow {
+    display: block;
+    background-color: black;
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    min-height: 30px;
+}
+
+.right-arrow {
+    display: block;
+    background-color: black;
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    min-height: 30px;
+}
+
