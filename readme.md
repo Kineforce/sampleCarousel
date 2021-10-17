@@ -13,7 +13,7 @@ It's really simple:
 *carousel_sample.js* and *carousel_sample.css*
 - Import them to your main HTML file;
 
-After you've downloaded the necessary failes and imported them to your main html file, you can instantiate a new sampleCarousel by doing the following steps:
+After you've downloaded the necessary files and imported them to your main html file, you can instantiate a new sampleCarousel by doing the following steps:
 
     let sample_carousel = new SampleCarousel(
         carousel_texts,
