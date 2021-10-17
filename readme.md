@@ -29,6 +29,7 @@ Where:
 - *text_height* this variable indicates the heigh of the texts inside the carousel.
 - *text_max_width* this variable indicates the maximum width of the texts inside the carousel.
 - *transition_speed* indicates the transition speed in *milliseconds* between the texts inside the carousel.
+- *auto_transition* an object with 'move_delay' and 'direction' properties, it'll indicate how much seconds the carousel will automatically trigger a move, and which direction provided.
 
 ## How can i apply my own styles on it?
 

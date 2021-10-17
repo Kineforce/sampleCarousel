@@ -12,13 +12,17 @@ window.addEventListener('load', event => {
     let text_height = 230;
     let text_max_width = 500;
     let transition_speed = 100;
-
+    let auto_transition = {
+        move_delay: 1,
+        'direction': 'right'
+    };
     window.sample_carousel_1 = new SampleCarousel(
         carousel_texts,
         carousel_container,
         text_height,
         text_max_width,
-        transition_speed
+        transition_speed,
+        auto_transition
     );
 
     sample_carousel_1.generateHtmlCarousel();
@@ -35,13 +39,18 @@ window.addEventListener('load', event => {
     text_height = 230;
     text_max_width = 500;
     transition_speed = 500;
+    auto_transition = {
+        move_delay: 2,
+        'direction': 'left'
+    };
 
     window.sample_carousel_2 = new SampleCarousel(
         carousel_texts,
         carousel_container,
         text_height,
         text_max_width,
-        transition_speed
+        transition_speed,
+        auto_transition
     );
 
     sample_carousel_2.generateHtmlCarousel();
@@ -58,13 +67,15 @@ window.addEventListener('load', event => {
     text_height = 230;
     text_max_width = 500;
     transition_speed = 1000;
+    auto_transition = 0;
 
     window.sample_carousel_3 = new SampleCarousel(
         carousel_texts,
         carousel_container,
         text_height,
         text_max_width,
-        transition_speed
+        transition_speed,
+        auto_transition
     );
 
     sample_carousel_3.generateHtmlCarousel();

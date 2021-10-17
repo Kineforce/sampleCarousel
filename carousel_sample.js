@@ -9,21 +9,26 @@
  */
 class SampleCarousel {
 
-    speed_animation = 200;
-    error_msg = "";
+    li_items = []; 
     text_list = [];
     html_div_id = "";
     generated_html = "";
+    error_msg = "";
+    speed_animation = 200;
     text_height = 230;
     max_text_width = 500;
-    li_items = []; 
+    auto_transition = {
+        'move_delay': 0,
+        'direction' : ''
+    };
 
-    constructor(_text_list, _html_div_id, _text_height, _max_text_width, _speed_animation){
+    constructor(_text_list, _html_div_id, _text_height, _max_text_width, _speed_animation, _auto_transition){
         this.text_list = _text_list;
         this.html_div_id = _html_div_id;
         this.text_height = _text_height ? _text_height : 100;
         this.max_text_width = _max_text_width ? _max_text_width : 500;
         this.speed_animation = _speed_animation ? _speed_animation : 200;
+        this.auto_transition = _auto_transition;
 
         if (_text_list.length == 0){
             this.error_msg = "Need to provide at least one text to carousel!";
@@ -42,14 +47,32 @@ class SampleCarousel {
 
     injectCarouselInsideDiv() {
         let container_to_add_carousel = document.getElementById(this.html_div_id);
-
         container_to_add_carousel.append(this.generated_html);
   
+        if (this.auto_transition){
+            this.automaticCarousel();
+        }
     }
 
-    startState() {
-        this.state += 1;
-        console.log(this.state);
+    automaticCarousel() {
+        setInterval(()=>{
+            if (!this.auto_transition.direction){
+                if (Math.random() > 0.5) {
+                    this.moveToRight();
+                } else {
+                    this.moveToLeft();
+                }
+            }
+
+            if (this.auto_transition.direction){
+                if (this.auto_transition.direction == 'left'){
+                    this.moveToLeft();
+                } else {
+                    this.moveToRight();
+                }
+            }
+
+        }, this.auto_transition.move_delay * 1000)
     }
 
     moveToRight() {
