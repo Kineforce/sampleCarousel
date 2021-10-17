@@ -22,7 +22,14 @@ class SampleCarousel {
         'direction' : ''
     };
 
-    constructor(_text_list, _html_div_id, _text_height, _max_text_width, _speed_animation, _auto_transition){
+    constructor(
+        _text_list, 
+        _html_div_id, 
+        _text_height, 
+        _max_text_width, 
+        _speed_animation, 
+        _auto_transition
+    ){
         this.text_list = _text_list;
         this.html_div_id = _html_div_id;
         this.text_height = _text_height ? _text_height : 100;

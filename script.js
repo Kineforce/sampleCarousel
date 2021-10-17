@@ -67,7 +67,10 @@ window.addEventListener('load', event => {
     text_height = 230;
     text_max_width = 500;
     transition_speed = 1000;
-    auto_transition = 0;
+    auto_transition = {
+        'move_delay': 4,
+        'direction': ''
+    };
 
     window.sample_carousel_3 = new SampleCarousel(
         carousel_texts,
