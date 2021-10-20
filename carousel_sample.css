@@ -1,7 +1,11 @@
 /** CENTER MAIN DIV */
 .lsm-carousel {
     margin: auto;
-    max-width: 700px;
+    max-width: 1200px;
+    font-size: 26px;
+    color: #8a8a8a;
+    margin-left: 100px;
+    margin-right: 100px;
 }
 
 /** FLEX INNER DIV */
@@ -11,15 +15,34 @@
     justify-content: space-evenly;
 }
 
+.carousel-text-subtext {
+    font-weight: 900;
+    font-size: 33px;
+}
+
 /** REMOVE DOTS FROM LI */
 .carousel-text-list {
     position: relative;
     display: flex;
-    font-family: monospace;
     list-style-type: none;
     padding-inline-start: 0px;
     overflow-x: hidden;
+    overflow-y: auto;
+    height: 450px;
     justify-content: center;
+}
+
+.carousel-text-item {
+    text-align: center;
+    line-height: 30px;
+    flex-direction: column;
+    font-size: 26px;
+    justify-content: space-around;
+    font-weight: 400;
+    list-style-type: none;
+    color: #8a8a8a;
+    padding-inline-start: 0px !important;
+    overflow-y: auto;
 }
 
 /** HIDE ITEM */
@@ -37,29 +60,91 @@
 }
 
 .arrow:hover {
-    background-color: crimson;
     cursor: pointer;
 }
 
 .arrow:active {
-    background-color: rgb(177, 16, 48);
+    color: rgb(177, 16, 48);
 }
 
 .left-arrow {
     display: block;
-    background-color: black;
-    width: 30px;
-    height: 30px;
-    min-width: 30px;
-    min-height: 30px;
+    width: 70px;
+    height: 79px;
+    margin-right: 30px;
+    opacity: 0.5;
 }
 
 .right-arrow {
     display: block;
-    background-color: black;
-    width: 30px;
-    height: 30px;
-    min-width: 30px;
-    min-height: 30px;
+    width: 70px;
+    height: 79px;
+    margin-left: 30px;
+    opacity: 0.5;
 }
 
+.grey_circle:hover {
+    background-color: #ff8686;
+    cursor: pointer;
+}
+
+.selected_item_carousel {
+    background-color: #ff8686 !important;
+}
+
+.carousel-buttons {
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+}
+
+.grey_circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    background-color: #C4C4C4;
+    margin: 5px;
+}
+
+/** MEDIA QUERIES */
+@media screen and (max-width: 1261px) {
+    .carousel-text-item{
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .carousel-text-subtext {
+        font-size: 25px
+    }
+}
+
+@media screen and (max-width: 846px){
+    .lsm-carousel {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .carousel-text-item {
+        height: auto;
+    }
+
+    .carousel-text-list {
+        height: 500px;
+    }
+
+    .right-arrow {
+        width: 30px;
+        height: 40px;
+        margin-left: 0px;
+    }
+
+    .left-arrow {
+        width: 30px;
+        height: 40px;
+        margin-right: 0px;
+    }
+
+    .carousel-text-subtext {
+        font-size: 20px;
+    }
+}

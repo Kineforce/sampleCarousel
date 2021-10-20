@@ -1,15 +1,16 @@
 /**
  * 
- * @param _text_list An array containing the text to display in carroussel
+ * @param _text_list An array of arrays, containing the text to display in carroussel in the index 0, and the subtext and index 1
  * @param _html_div_id An already ID of an existing div in the current HTML document
  * @param _text_height Height in pixels of the text elements
  * @param _max_text_width Max width in pixels of the text elements
  * @param _speed_animation Speed in miliseconds of the transition between the text elements
  * @param _auto_transition An object with the delay in seconds to auto transition between text elements and the direction of the transition
  */
-class SampleCarousel {
+ class SampleCarousel {
 
     li_items = []; 
+    btn_itens = [];
     text_list = [];
     html_div_id = "";
     generated_html = "";
@@ -21,6 +22,7 @@ class SampleCarousel {
         'move_delay': 0,
         'direction' : ''
     };
+    curr_visible = 0;
 
     constructor(
         _text_list, 
@@ -134,6 +136,8 @@ class SampleCarousel {
             next_item.classList.remove('hide-item-list');
         }, this.speed_animation)
 
+        this.curr_visible = next_item.dataset.position_id;
+        this.updateSelectedBtnState();
         console.log("Moving text to right!");
     }
 
@@ -190,7 +194,47 @@ class SampleCarousel {
             next_item.classList.remove('hide-item-list');
         }, this.speed_animation)
 
+
+        this.curr_visible = next_item.dataset.position_id;
+        this.updateSelectedBtnState();
         console.log("Moving text to left!");
+    }
+
+    updateSelectedBtnState(){
+        this.btn_itens.forEach(btn => {
+            if (btn.dataset.position_btn_id == this.curr_visible){
+                btn.classList.add('selected_item_carousel');
+            } else {
+                btn.classList.remove('selected_item_carousel');
+            }
+        })
+    }
+
+    btnMoveText(event) {
+        let clicked_id_btn = event.target.dataset.position_btn_id;
+        let backp_speed = this.speed_animation;
+        this.speed_animation = 50;
+
+        const moveUntilFulfill = () => {
+            setTimeout(() => {
+                if (this.curr_visible != clicked_id_btn){                    
+                    if (clicked_id_btn < this.curr_visible){
+                        this.moveToLeft();
+                    } else {
+                        this.moveToRight();
+                    }
+                } else {
+                    this.speed_animation = backp_speed;
+                    return;
+                }
+
+                console.log("Is this running?")
+                moveUntilFulfill();
+            }, 50)
+        }
+
+        moveUntilFulfill();
+            
     }
 
     createSizeClass() {
@@ -226,42 +270,70 @@ class SampleCarousel {
         let carousel_container = document.createElement('div');
         carousel_container.classList.add('carousel-container');
 
-        let left_arrow = document.createElement('div');
+        let left_arrow = document.createElement('img');
         left_arrow.classList.add('left-arrow');
         left_arrow.classList.add('arrow');
+        left_arrow.src = "/public/svg_left_arrow.svg"
 
         left_arrow.addEventListener('click', event => {
             this.moveToLeft();
         });
         carousel_container.append(left_arrow);
 
+        let carousel_body_wrapper = document.createElement('div');
+        carousel_body_wrapper.classList.add('carousel-body-wrapper');
+
         let carousel_text_container = document.createElement('div');
         carousel_text_container.classList.add('carousel-text-container');
 
-        carousel_container.append(carousel_text_container);
+        carousel_container.append(carousel_body_wrapper);
+
+        carousel_body_wrapper.append(carousel_text_container);
+
+        let carousel_buttons = document.createElement('div');
+        carousel_buttons.classList.add('carousel-buttons');        
 
         let carousel_text_list = document.createElement('ul');
         carousel_text_list.classList.add('carousel-text-list');
+
+        carousel_body_wrapper.append(carousel_buttons);
 
         // Generate a li for each text in array provided
         this.text_list.forEach((text, index) => {
             let carousel_text_item = document.createElement('li');
             carousel_text_item.classList.add('carousel-text-item');
             carousel_text_item.dataset.position_id = index;
-            carousel_text_item.innerText = text;
+            carousel_text_item.innerText = text[0];
+
+            let carousel_text_subtext = document.createElement('span');
+            carousel_text_subtext.classList.add('carousel-text-subtext');
+            carousel_text_subtext.innerText = text[1];            
+
+            carousel_text_item.append(carousel_text_subtext);
             
             if (index != 0) carousel_text_item.classList.add('hide-item-list');
             if (index == 0) carousel_text_item.dataset.visible = true;
             this.li_items.push(carousel_text_item);
             
             carousel_text_list.append(carousel_text_item);
+
+            let carousel_btn = document.createElement('span');
+            carousel_btn.classList.add('grey_circle');
+            carousel_btn.dataset.position_btn_id = index;
+            carousel_btn.addEventListener('click', event => {
+                this.btnMoveText(event);
+            });
+
+            carousel_buttons.append(carousel_btn);
+            this.btn_itens.push(carousel_btn);
         })
 
         carousel_text_container.append(carousel_text_list);
 
-        let right_arrow = document.createElement('div');
+        let right_arrow = document.createElement('img');
         right_arrow.classList.add('right-arrow');
         right_arrow.classList.add('arrow');
+        right_arrow.src = "/public/svg_right_arrow.svg"
 
         right_arrow.addEventListener('click', event => {
             this.moveToRight();
@@ -273,6 +345,7 @@ class SampleCarousel {
 
         this.generated_html = carousel_div;
         this.injectCarouselInsideDiv();
+        this.updateSelectedBtnState();
     }
 
     outputError(){
