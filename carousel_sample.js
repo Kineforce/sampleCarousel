@@ -5,7 +5,7 @@
  * @param _text_height Height in pixels of the text elements
  * @param _max_text_width Max width in pixels of the text elements
  * @param _speed_animation Speed in miliseconds of the transition between the text elements
- * 
+ * @param _auto_transition An object with the delay in seconds to auto transition between text elements and the direction of the transition
  */
 class SampleCarousel {
 
